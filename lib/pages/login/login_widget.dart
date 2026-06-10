@@ -146,74 +146,66 @@ class _LoginWidgetState extends State<LoginWidget>
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(1.0, 0.8),
-                              child: Text(
-                                'A revolução na gestão',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.plusJakartaSans(
+                              alignment: AlignmentDirectional(-1.0, 1.0),
+                              child: RichText(
+                                textScaler: MediaQuery.of(context).textScaler,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'A revolução na gestão ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.plusJakartaSans(
+                                              fontWeight: FontWeight.w800,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            fontSize: 64.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w800,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                            lineHeight: 1.0,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: 'do seu ',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'restaurante',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                    )
+                                  ],
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.plusJakartaSans(
+                                          fontWeight: FontWeight.w800,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        fontSize: 64.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w800,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                      fontSize: 64.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w800,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                      lineHeight: 1.0,
-                                    ),
-                              ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(0.03, 0.82),
-                              child: Text(
-                                'do seu',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.plusJakartaSans(
-                                        fontWeight: FontWeight.w800,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      fontSize: 64.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w800,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.98),
-                              child: Text(
-                                'restaurante.',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.plusJakartaSans(
-                                        fontWeight: FontWeight.w800,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      fontSize: 64.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w800,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
+                                ),
                               ),
                             ),
                           ],
@@ -270,8 +262,8 @@ class _LoginWidgetState extends State<LoginWidget>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 400.0,
-                                height: 150.0,
+                                width: 350.0,
+                                height: 120.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16.0),
                                 ),
@@ -280,6 +272,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                   borderRadius: BorderRadius.circular(0.0),
                                   child: Image.asset(
                                     'assets/images/logo.png',
+                                    width: 250.0,
                                     height: 100.0,
                                     fit: BoxFit.contain,
                                   ),
@@ -298,10 +291,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                     boxShadow: [
                                       BoxShadow(
                                         blurRadius: 5.0,
-                                        color: Color(0x0D000000),
+                                        color: Color(0x48000000),
                                         offset: Offset(
                                           0.0,
-                                          1.0,
+                                          0.0,
                                         ),
                                       )
                                     ],
@@ -966,6 +959,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ?.jsonBody ??
                                                         ''),
                                                     r'''$.dados_usuario.nome''',
+                                                  ).toString();
+                                                  FFAppState().iniciais =
+                                                      getJsonField(
+                                                    (_model.response
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.dados_usuario.iniciais''',
                                                   ).toString();
                                                   safeSetState(() {});
                                                 } else {

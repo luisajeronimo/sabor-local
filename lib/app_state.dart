@@ -97,35 +97,6 @@ class FFAppState extends ChangeNotifier {
     _paginaAtual = value;
   }
 
-  List<String> _listaPapeisState = [];
-  List<String> get listaPapeisState => _listaPapeisState;
-  set listaPapeisState(List<String> value) {
-    _listaPapeisState = value;
-  }
-
-  void addToListaPapeisState(String value) {
-    listaPapeisState.add(value);
-  }
-
-  void removeFromListaPapeisState(String value) {
-    listaPapeisState.remove(value);
-  }
-
-  void removeAtIndexFromListaPapeisState(int index) {
-    listaPapeisState.removeAt(index);
-  }
-
-  void updateListaPapeisStateAtIndex(
-    int index,
-    String Function(String) updateFn,
-  ) {
-    listaPapeisState[index] = updateFn(_listaPapeisState[index]);
-  }
-
-  void insertAtIndexInListaPapeisState(int index, String value) {
-    listaPapeisState.insert(index, value);
-  }
-
   int _statusTotal = 0;
   int get statusTotal => _statusTotal;
   set statusTotal(int value) {
@@ -173,6 +144,53 @@ class FFAppState extends ChangeNotifier {
   set userName(String value) {
     _userName = value;
     prefs.setString('ff_userName', value);
+  }
+
+  List<dynamic> _listaPapeisState = [];
+  List<dynamic> get listaPapeisState => _listaPapeisState;
+  set listaPapeisState(List<dynamic> value) {
+    _listaPapeisState = value;
+  }
+
+  void addToListaPapeisState(dynamic value) {
+    listaPapeisState.add(value);
+  }
+
+  void removeFromListaPapeisState(dynamic value) {
+    listaPapeisState.remove(value);
+  }
+
+  void removeAtIndexFromListaPapeisState(int index) {
+    listaPapeisState.removeAt(index);
+  }
+
+  void updateListaPapeisStateAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    listaPapeisState[index] = updateFn(_listaPapeisState[index]);
+  }
+
+  void insertAtIndexInListaPapeisState(int index, dynamic value) {
+    listaPapeisState.insert(index, value);
+  }
+
+  String _iniciais = '';
+  String get iniciais => _iniciais;
+  set iniciais(String value) {
+    _iniciais = value;
+  }
+
+  dynamic _dashboardState;
+  dynamic get dashboardState => _dashboardState;
+  set dashboardState(dynamic value) {
+    _dashboardState = value;
+  }
+
+  dynamic _listaCuponsState;
+  dynamic get listaCuponsState => _listaCuponsState;
+  set listaCuponsState(dynamic value) {
+    _listaCuponsState = value;
   }
 
   final _cachePapeisManager = FutureRequestManager<ApiCallResponse>();

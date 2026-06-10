@@ -64,8 +64,8 @@ class ModalCriarProdutoModel extends FlutterFlowModel<ModalCriarProdutoWidget> {
     if (val.length < 10) {
       return 'Requires at least 10 characters.';
     }
-    if (val.length > 200) {
-      return 'Maximum 200 characters allowed, currently ${val.length}.';
+    if (val.length > 600) {
+      return 'Maximum 600 characters allowed, currently ${val.length}.';
     }
 
     return null;

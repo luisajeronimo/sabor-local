@@ -39,6 +39,9 @@ abstract class FlutterFlowTheme {
   late Color foundationBlack;
   late Color foundationStarbucksGreenStarbucksGreen900;
   late Color foundationBackground;
+  late Color customColor1;
+  late Color customColor2;
+  late Color corfundo;
 
   FFDesignTokens get designToken => FFDesignTokens(this);
 
@@ -153,6 +156,9 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color foundationStarbucksGreenStarbucksGreen900 =
       const Color(0xFF01291B);
   late Color foundationBackground = const Color(0xFFFAFAFA);
+  late Color customColor1 = const Color(0xFF485B15);
+  late Color customColor2 = const Color(0xFFB9DD6A);
+  late Color corfundo = const Color(0x69ACADAF);
 }
 
 abstract class Typography {

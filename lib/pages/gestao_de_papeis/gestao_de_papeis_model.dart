@@ -6,6 +6,10 @@ import 'gestao_de_papeis_widget.dart' show GestaoDePapeisWidget;
 import 'package:flutter/material.dart';
 
 class GestaoDePapeisModel extends FlutterFlowModel<GestaoDePapeisWidget> {
+  ///  Local state fields for this page.
+
+  String regraAdm = 'ADMINISTRADOR';
+
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;

@@ -88,3 +88,55 @@ bool? verificaPratoDoDia(dynamic valorDoBanco) {
   }
   return valorDoBanco.toString() == 'PratoDoDia';
 }
+
+List<dynamic>? filtrarPedidosPorPendencias(
+  List<int>? statusList,
+  List<dynamic>? listaCompleta,
+) {
+  if (listaCompleta == null || statusList == null || statusList.isEmpty) {
+    return [];
+  }
+
+  return listaCompleta
+      .where((pedido) => statusList.contains(pedido['status_pedido_id']))
+      .toList();
+}
+
+int? contarPedidosPorPendencias(
+  List<dynamic>? listaCompleta,
+  List<int>? statusList,
+) {
+  if (listaCompleta == null || statusList == null || statusList.isEmpty) {
+    return 0;
+  }
+  return listaCompleta
+      .where((pedido) => statusList.contains(pedido['status_pedido_id']))
+      .length;
+}
+
+int? converterDataParaTimestamp(String? dataDigitada) {
+  if (dataDigitada == null || dataDigitada.isEmpty) {
+    return null;
+  }
+
+  try {
+    // Quebra o texto "MM/DD/YYYY" usando a barra como separador
+    List<String> partes = dataDigitada.split('/');
+
+    // Garante que a pessoa digitou certinho com as duas barras
+    if (partes.length != 3) return null;
+
+    int mes = int.parse(partes[0]);
+    int dia = int.parse(partes[1]);
+    int ano = int.parse(partes[2]);
+
+    // Cria a data real no sistema
+    DateTime dataReal = DateTime(ano, mes, dia);
+
+    // Retorna o número gigante (Timestamp em milissegundos) para o Xano
+    return dataReal.millisecondsSinceEpoch;
+  } catch (e) {
+    // Se o usuário digitar letras em vez de números, evita a tela vermelha
+    return null;
+  }
+}

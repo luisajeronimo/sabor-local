@@ -1,5 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/modal_editar_usuario_sucesso_widget.dart';
+import '/components/modal_criar_papel_sucesso_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,17 +8,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'modal_criar_papel_model.dart';
 export 'modal_criar_papel_model.dart';
 
 class ModalCriarPapelWidget extends StatefulWidget {
-  const ModalCriarPapelWidget({
-    super.key,
-    required this.usuarioSelecionado,
-  });
-
-  final dynamic usuarioSelecionado;
+  const ModalCriarPapelWidget({super.key});
 
   @override
   State<ModalCriarPapelWidget> createState() => _ModalCriarPapelWidgetState();
@@ -41,9 +37,8 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
     super.initState();
     _model = createModel(context, () => ModalCriarPapelModel());
 
-    _model.nomeCompletoTextController ??=
-        TextEditingController(text: 'Ex: Cozinheiro');
-    _model.nomeCompletoFocusNode ??= FocusNode();
+    _model.nomePapelTextController ??= TextEditingController();
+    _model.nomePapelFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -271,8 +266,8 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 6.0, 10.0),
-                                            child: Icon(
-                                              FFIcons.kicon,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.addressCard,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -350,9 +345,9 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                             width: 250.0,
                                             child: TextFormField(
                                               controller: _model
-                                                  .nomeCompletoTextController,
+                                                  .nomePapelTextController,
                                               focusNode:
-                                                  _model.nomeCompletoFocusNode,
+                                                  _model.nomePapelFocusNode,
                                               autofocus: false,
                                               enabled: true,
                                               autofillHints: [
@@ -390,7 +385,7 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                                                   .labelMedium
                                                                   .fontStyle,
                                                         ),
-                                                hintText: 'Nome Completo',
+                                                hintText: 'Ex: Cozinheiro',
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .labelMedium
@@ -524,7 +519,7 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                                       .primaryText,
                                               enableInteractiveSelection: true,
                                               validator: _model
-                                                  .nomeCompletoTextControllerValidator
+                                                  .nomePapelTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -599,15 +594,15 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                                   ),
                                                 );
                                               }
-                                              final papelTodosPapeisResponse =
+                                              final nivelDeAcessoTodosPapeisResponse =
                                                   snapshot.data!;
 
                                               return FlutterFlowDropDown<
                                                   String>(
                                                 controller: _model
-                                                        .papelValueController ??=
+                                                        .nivelDeAcessoValueController ??=
                                                     FormFieldController<String>(
-                                                  _model.papelValue ??=
+                                                  _model.nivelDeAcessoValue ??=
                                                       'ADMINISTRADOR',
                                                 ),
                                                 options: [
@@ -616,7 +611,8 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                                 ],
                                                 onChanged: (val) =>
                                                     safeSetState(() => _model
-                                                        .papelValue = val),
+                                                            .nivelDeAcessoValue =
+                                                        val),
                                                 width: 230.0,
                                                 height: 40.0,
                                                 textStyle:
@@ -725,18 +721,14 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                             .validate()) {
                                       return;
                                     }
-                                    if (_model.papelValue == null) {
+                                    if (_model.nivelDeAcessoValue == null) {
                                       return;
                                     }
                                     _model.resultado =
-                                        await EditarUsuarioCall.call(
-                                      idUser: getJsonField(
-                                        widget.usuarioSelecionado,
-                                        r'''$.id''',
-                                      ),
-                                      nome: _model
-                                          .nomeCompletoTextController.text,
-                                      nomePapel: _model.papelValue,
+                                        await CriarPapelCall.call(
+                                      papel:
+                                          _model.nomePapelTextController.text,
+                                      nivelDeAcesso: _model.nivelDeAcessoValue,
                                     );
 
                                     if ((_model.resultado?.succeeded ?? true)) {
@@ -751,7 +743,7 @@ class _ModalCriarPapelWidgetState extends State<ModalCriarPapelWidget>
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
                                             child:
-                                                ModalEditarUsuarioSucessoWidget(),
+                                                ModalCriarPapelSucessoWidget(),
                                           );
                                         },
                                       ).then((value) => safeSetState(() {}));

@@ -86,16 +86,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : LoginWidget(),
         ),
         FFRoute(
-          name: PromocoesEFidelidadeWidget.routeName,
-          path: PromocoesEFidelidadeWidget.routePath,
-          builder: (context, params) => PromocoesEFidelidadeWidget(),
-        ),
-        FFRoute(
-          name: PainelDeGestaoWidget.routeName,
-          path: PainelDeGestaoWidget.routePath,
-          builder: (context, params) => PainelDeGestaoWidget(),
-        ),
-        FFRoute(
           name: RecuperacaoSenhaWidget.routeName,
           path: RecuperacaoSenhaWidget.routePath,
           builder: (context, params) => RecuperacaoSenhaWidget(),
@@ -109,6 +99,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: PromocoesEFidelidadeWidget.routeName,
+          path: PromocoesEFidelidadeWidget.routePath,
+          builder: (context, params) => PromocoesEFidelidadeWidget(),
+        ),
+        FFRoute(
+          name: PainelDeGestaoWidget.routeName,
+          path: PainelDeGestaoWidget.routePath,
+          builder: (context, params) => PainelDeGestaoWidget(),
         ),
         FFRoute(
           name: LoginWidget.routeName,
@@ -134,6 +134,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: GestaoDeAcessosWidget.routeName,
           path: GestaoDeAcessosWidget.routePath,
           builder: (context, params) => GestaoDeAcessosWidget(),
+        ),
+        FFRoute(
+          name: PainelDeGestaoCopyWidget.routeName,
+          path: PainelDeGestaoCopyWidget.routePath,
+          builder: (context, params) => PainelDeGestaoCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

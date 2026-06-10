@@ -1,6 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/modal_editar_usuario_sucesso_widget.dart';
-import '/components/modal_excluir_usuario_widget.dart';
+import '/components/modal_editar_papel_sucesso_widget.dart';
+import '/components/modal_excluir_papel_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'modal_editar_papel_model.dart';
 export 'modal_editar_papel_model.dart';
@@ -16,10 +17,10 @@ export 'modal_editar_papel_model.dart';
 class ModalEditarPapelWidget extends StatefulWidget {
   const ModalEditarPapelWidget({
     super.key,
-    required this.usuarioSelecionado,
+    required this.papelSelecionado,
   });
 
-  final dynamic usuarioSelecionado;
+  final dynamic papelSelecionado;
 
   @override
   State<ModalEditarPapelWidget> createState() => _ModalEditarPapelWidgetState();
@@ -42,24 +43,13 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
     super.initState();
     _model = createModel(context, () => ModalEditarPapelModel());
 
-    _model.nomeCompletoTextController ??= TextEditingController(
+    _model.nomePapelTextController ??= TextEditingController(
         text: getJsonField(
-      widget.usuarioSelecionado,
-      r'''$.nome''',
+      widget.papelSelecionado,
+      r'''$.papel''',
     ).toString());
-    _model.nomeCompletoFocusNode ??= FocusNode();
+    _model.nomePapelFocusNode ??= FocusNode();
 
-    _model.emailTextController ??= TextEditingController(
-        text: getJsonField(
-      widget.usuarioSelecionado,
-      r'''$.email''',
-    ).toString());
-    _model.emailFocusNode ??= FocusNode();
-
-    _model.statusValue = getJsonField(
-      widget.usuarioSelecionado,
-      r'''$.status_ativo''',
-    );
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -169,7 +159,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
                       child: Text(
-                        'Editar Usuário',
+                        'Editar Papel',
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
@@ -204,7 +194,8 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Edite as informações do usuário',
+                                  text:
+                                      'Preencha os dados abaixo para configurar o papel',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -285,19 +276,19 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 6.0, 10.0),
-                                            child: Icon(
-                                              Icons.person_outline,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.addressCard,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                              size: 24.0,
+                                              size: 22.0,
                                             ),
                                           ),
                                           Align(
                                             alignment:
                                                 AlignmentDirectional(-1.0, 0.0),
                                             child: Text(
-                                              'DADOS PESSOAIS',
+                                              'DEFINIÇÕES DE PAPEL',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -331,7 +322,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                         alignment:
                                             AlignmentDirectional(-1.0, 0.0),
                                         child: Text(
-                                          'Nome Completo',
+                                          'Papel',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -361,12 +352,12 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 10.0),
                                           child: Container(
-                                            width: 200.0,
+                                            width: 250.0,
                                             child: TextFormField(
                                               controller: _model
-                                                  .nomeCompletoTextController,
+                                                  .nomePapelTextController,
                                               focusNode:
-                                                  _model.nomeCompletoFocusNode,
+                                                  _model.nomePapelFocusNode,
                                               autofocus: false,
                                               enabled: true,
                                               autofillHints: [
@@ -538,7 +529,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                                       .primaryText,
                                               enableInteractiveSelection: true,
                                               validator: _model
-                                                  .nomeCompletoTextControllerValidator
+                                                  .nomePapelTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -562,293 +553,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                         alignment:
                                             AlignmentDirectional(-1.0, 0.0),
                                         child: Text(
-                                          'Email',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font:
-                                                    GoogleFonts.plusJakartaSans(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, -1.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 10.0),
-                                          child: Container(
-                                            width: 280.0,
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.emailTextController,
-                                              focusNode: _model.emailFocusNode,
-                                              autofocus: false,
-                                              enabled: true,
-                                              autofillHints: [
-                                                AutofillHints.email
-                                              ],
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .plusJakartaSans(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                hintText: 'Email',
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .plusJakartaSans(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color:
-                                                              Color(0xFFAAADB2),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .terciaryText,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .plusJakartaSans(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                        lineHeight: 2.0,
-                                                      ),
-                                              textAlign: TextAlign.start,
-                                              maxLines: null,
-                                              cursorColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              enableInteractiveSelection: true,
-                                              validator: _model
-                                                  .emailTextControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(-1.0, -1.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 0.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 10.0, 10.0),
-                                            child: Icon(
-                                              Icons.badge_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 29.0,
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(-1.0, 0.0),
-                                            child: Text(
-                                              'DEFINIÇÕES DE PERFIL',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    font: GoogleFonts
-                                                        .plusJakartaSans(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, 0.0),
-                                        child: Text(
-                                          'Papel',
+                                          'Nível de Acesso',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -899,29 +604,29 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                                   ),
                                                 );
                                               }
-                                              final papelTodosPapeisResponse =
+                                              final nivelDeAcessoTodosPapeisResponse =
                                                   snapshot.data!;
 
                                               return FlutterFlowDropDown<
                                                   String>(
                                                 controller: _model
-                                                        .papelValueController ??=
+                                                        .nivelDeAcessoValueController ??=
                                                     FormFieldController<String>(
-                                                  _model.papelValue ??=
+                                                  _model.nivelDeAcessoValue ??=
                                                       getJsonField(
-                                                    widget.usuarioSelecionado,
-                                                    r'''$._papel.papel''',
+                                                    widget.papelSelecionado,
+                                                    r'''$.nivel_de_acesso''',
                                                   ).toString(),
                                                 ),
-                                                options:
-                                                    TodosPapeisCall.listaPapeis(
-                                                  papelTodosPapeisResponse
-                                                      .jsonBody,
-                                                )!,
+                                                options: [
+                                                  'ADMINISTRADOR',
+                                                  'OPERACIONAL'
+                                                ],
                                                 onChanged: (val) =>
                                                     safeSetState(() => _model
-                                                        .papelValue = val),
-                                                width: 200.0,
+                                                            .nivelDeAcessoValue =
+                                                        val),
+                                                width: 230.0,
                                                 height: 40.0,
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
@@ -952,7 +657,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                hintText: 'Ex: Cozinheiro',
+                                                hintText: 'Ex: Administrador',
                                                 icon: Icon(
                                                   Icons
                                                       .keyboard_arrow_down_rounded,
@@ -974,115 +679,6 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                                 isMultiSelect: false,
                                               );
                                             },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-1.0, -1.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 20.0, 0.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, 0.0),
-                                        child: Text(
-                                          'Status Inicial',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font:
-                                                    GoogleFonts.plusJakartaSans(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 10.0),
-                                        child: Container(
-                                          width: 280.0,
-                                          height: 43.0,
-                                          decoration: BoxDecoration(),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -1.0, 0.0),
-                                                child: Switch.adaptive(
-                                                  value: _model.statusValue!,
-                                                  onChanged: (newValue) async {
-                                                    safeSetState(() =>
-                                                        _model.statusValue =
-                                                            newValue);
-                                                  },
-                                                  activeColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  activeTrackColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary,
-                                                  inactiveTrackColor:
-                                                      Color(0x32ACADAF),
-                                                  inactiveThumbColor:
-                                                      Color(0xFF5A5C5E),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'Ativo',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .plusJakartaSans(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
                                           ),
                                         ),
                                       ),
@@ -1178,10 +774,9 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child:
-                                                    ModalExcluirUsuarioWidget(
-                                                  usuarioSelecionado2: widget
-                                                      .usuarioSelecionado!,
+                                                child: ModalExcluirPapelWidget(
+                                                  papelSelecionado2:
+                                                      widget.papelSelecionado!,
                                                 ),
                                               );
                                             },
@@ -1207,7 +802,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                               alignment: AlignmentDirectional(
                                                   -1.0, 0.0),
                                               child: Text(
-                                                'Excluir usuário',
+                                                'Excluir papel',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -1294,20 +889,15 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                             .validate()) {
                                       return;
                                     }
-                                    if (_model.papelValue == null) {
-                                      return;
-                                    }
                                     _model.resultado =
-                                        await EditarUsuarioCall.call(
-                                      idUser: getJsonField(
-                                        widget.usuarioSelecionado,
+                                        await EditarPapelCall.call(
+                                      idPapel: getJsonField(
+                                        widget.papelSelecionado,
                                         r'''$.id''',
                                       ),
-                                      nome: _model
-                                          .nomeCompletoTextController.text,
-                                      email: _model.emailTextController.text,
-                                      nomePapel: _model.papelValue,
-                                      statusAtivo: _model.statusValue,
+                                      papel:
+                                          _model.nomePapelTextController.text,
+                                      nivelDeAcesso: _model.nivelDeAcessoValue,
                                     );
 
                                     if ((_model.resultado?.succeeded ?? true)) {
@@ -1322,7 +912,7 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
                                             child:
-                                                ModalEditarUsuarioSucessoWidget(),
+                                                ModalEditarPapelSucessoWidget(),
                                           );
                                         },
                                       ).then((value) => safeSetState(() {}));
@@ -1331,10 +921,9 @@ class _ModalEditarPapelWidgetState extends State<ModalEditarPapelWidget>
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title:
-                                                Text('Erro ao editar usuário'),
+                                            title: Text('Erro ao editar papel'),
                                             content: Text(
-                                                'Não foi possível editar o usuário, tente novamente.'),
+                                                'Não foi possível editar o papel, tente novamente.'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(

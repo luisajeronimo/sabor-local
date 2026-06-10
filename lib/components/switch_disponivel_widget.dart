@@ -69,18 +69,7 @@ class _SwitchDisponivelWidgetState extends State<SwitchDisponivelWidget> {
           );
 
           if ((_model.resultadoAttProduto?.succeeded ?? true)) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'OK',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
+            _model.updatePage(() {});
           }
 
           safeSetState(() {});
@@ -98,18 +87,7 @@ class _SwitchDisponivelWidgetState extends State<SwitchDisponivelWidget> {
           );
 
           if ((_model.resultadoAttProdutoCopy?.succeeded ?? true)) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'OK',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
+            _model.updatePage(() {});
           }
 
           safeSetState(() {});

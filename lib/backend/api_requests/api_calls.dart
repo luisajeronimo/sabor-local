@@ -566,6 +566,273 @@ class UsuariosSistemaCall {
       ));
 }
 
+class CriarPapelCall {
+  static Future<ApiCallResponse> call({
+    String? papel = '',
+    String? nivelDeAcesso = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "papel": "${escapeStringForJson(papel)}",
+  "nivel_de_acesso": "${escapeStringForJson(nivelDeAcesso)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'CriarPapel',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/papel',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditarPapelCall {
+  static Future<ApiCallResponse> call({
+    int? idPapel,
+    String? papel = '',
+    String? nivelDeAcesso = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "papel_id": ${idPapel},
+  "papel": "${escapeStringForJson(papel)}",
+  "nivel_de_acesso": "${escapeStringForJson(nivelDeAcesso)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditarPapel',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/papel/${idPapel}',
+      callType: ApiCallType.PATCH,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DeletarPapelCall {
+  static Future<ApiCallResponse> call({
+    String? idPapel = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'DeletarPapel',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/papel/${idPapel}',
+      callType: ApiCallType.DELETE,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DashboardCall {
+  static Future<ApiCallResponse> call({
+    String? periodo = 'hoje',
+    int? pagina = 1,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dashboard',
+      apiUrl:
+          'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/dashboard/top-produtos',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'periodo': periodo,
+        'pagina': pagina,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class TodosCuponsCall {
+  static Future<ApiCallResponse> call({
+    int? page = 1,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'TodosCupons',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/cupom',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'page': page,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? listaCupons(dynamic response) => getJsonField(
+        response,
+        r'''$.items''',
+        true,
+      ) as List?;
+  static String? nomeCupom(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.items[:].codigo''',
+      ));
+}
+
+class AdicionaCupomCall {
+  static Future<ApiCallResponse> call({
+    String? codigo = '',
+    double? desconto,
+    String? tipoDesconto = '',
+    String? validade = '',
+    int? minimo,
+    int? maximo,
+    bool? status = true,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "codigo": "${escapeStringForJson(codigo)}",
+  "tipo_desconto": "${escapeStringForJson(tipoDesconto)}",
+  "valor_desconto": ${desconto},
+  "validade": "${escapeStringForJson(validade)}",
+  "valor_minimo": ${minimo},
+  "valor_maximo": ${maximo},
+  "status": ${status}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'AdicionaCupom',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/cupom',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditaCupomCall {
+  static Future<ApiCallResponse> call({
+    int? idCupom,
+    String? tipoDesconto = '',
+    int? valorDesconto,
+    String? validade = '',
+    double? vMin,
+    double? vMax,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "cupom_id": ${idCupom},
+  "tipo_desconto": "${escapeStringForJson(tipoDesconto)}",
+  "valor_desconto": ${valorDesconto},
+  "validade": "${escapeStringForJson(validade)}",
+  "valor_minimo": ${vMin},
+  "valor_maximo": ${vMax}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditaCupom',
+      apiUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/cupom/${idCupom}',
+      callType: ApiCallType.PATCH,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class StatusCupomCall {
+  static Future<ApiCallResponse> call({
+    int? idCupom,
+    bool? status,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "cupom_id": ${idCupom},
+  "status": ${status}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'StatusCupom',
+      apiUrl:
+          'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/cupom/status/${idCupom}',
+      callType: ApiCallType.PATCH,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class StatusPedidoCall {
+  static Future<ApiCallResponse> call({
+    int? idCupom,
+    int? status,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "pedido_id": ${idCupom},
+  "status_pedido_id": ${status}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'StatusPedido',
+      apiUrl:
+          'https://x8ki-letl-twmt.n7.xano.io/api:koEsyPU2/pedido/${idCupom}',
+      callType: ApiCallType.PATCH,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

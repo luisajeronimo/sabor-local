@@ -69,18 +69,7 @@ class _SwitchPratoDoDiaWidgetState extends State<SwitchPratoDoDiaWidget> {
           );
 
           if ((_model.resultadoPratoDoDia?.succeeded ?? true)) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'certo',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
+            _model.updatePage(() {});
           }
 
           safeSetState(() {});
@@ -97,18 +86,7 @@ class _SwitchPratoDoDiaWidgetState extends State<SwitchPratoDoDiaWidget> {
           );
 
           if ((_model.resultadoPratoDoDiaCopy?.succeeded ?? true)) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'certo',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
+            _model.updatePage(() {});
           }
 
           safeSetState(() {});
